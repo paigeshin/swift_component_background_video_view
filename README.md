@@ -2,6 +2,11 @@
 
 ```swift
 
+/** Set up Video Background **/
+//arg1 - hosting view
+//arg2 - network
+//arg3 - local
+
 func setUpVideoBackground(view: UIView, urlString: String? = nil, localFileName: String? = nil) {
     print("Video Background Started!")
     var videoPath: String?
