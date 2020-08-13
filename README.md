@@ -4,10 +4,6 @@
 
 
 
-    /** Set up Video Background **/
-    //arg1 - hosting view
-    //arg2 - network
-    //arg3 - local
     func setUpVideoBackground(view: UIView, urlString: String? = nil, localFileName: String? = nil) {
         print("Video Background Started!")
         var videoPath: String?
@@ -61,11 +57,10 @@
         //이유는 간단함. NSNotification.Name.AVPlayerItemDidPlayToEndTime은 모든 AVPlayer의 event를 관찰하는 애들임.
         //AVQueuePlayer가 끝날 때마다, background audio player도 영향을 받게 되어있다.
         //object를 지정해줘야한다. object는 item이여야 한다.
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: backgroundVideoPlayer?.currentItem, queue: .main) { notification in
-            self.backgroundAudioPlayer?.seek(to: CMTime.zero)
-            self.backgroundAudioPlayer?.play()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: backgroundVideoPlayer?.currentItem, queue: .main) { [weak self] notification in
+            self?.backgroundVideoPlayer?.seek(to: CMTime.zero)
+            self?.backgroundVideoPlayer?.play()
         }
     }
-
 
 ```
